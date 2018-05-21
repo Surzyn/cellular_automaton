@@ -1,4 +1,4 @@
-import rule30 from '../src/rules';
+import {rule30} from '../src/rules';
 
 
 describe('rules work fine', () => {

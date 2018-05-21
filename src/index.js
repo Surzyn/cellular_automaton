@@ -1,17 +1,19 @@
-import rule30 from './rules';
+import { rule30, rule60, rule90 } from './rules';
 import generateInitialValue from './source';
 import style from "./main.css";
 
-var _size = 31;
+var _size = 100;
 const sourceArray = generateInitialValue(_size);
 
+
 function doMagic(iterations) {
+    var rule = getRule();
     var tempArray = sourceArray.slice();
     showArr(tempArray);
     for (let i = 0; i < iterations; i++) {
         var nextArr = [];
         for (let index = 0; index < tempArray.length; index++) {
-            nextArr[index] = rule30(tempArray[index - 1], tempArray[index], tempArray[index + 1]);
+            nextArr[index] = rule(tempArray[index - 1], tempArray[index], tempArray[index + 1]);
         }
         tempArray = nextArr;
         showArr(tempArray);
@@ -20,11 +22,32 @@ function doMagic(iterations) {
 
 doMagic(15);
 
-document.getElementById('maxIterations').addEventListener("input", function (e) {
+function getRule() {
+    var rule = document.getElementById('rule').value;
+    switch (rule) {
+        case "30":
+            return rule30
+        case "60":
+            return rule60
+        case "90":
+            return rule90
+        default:
+            break;
+    }
+}
+
+document.getElementById('render').addEventListener("click", function (e) {
     cleanSymulation();
-    doMagic(e.target.value);
+    doMagic(document.getElementById('maxIterations').value);
+});
+
+document.getElementById('maxIterations').addEventListener("input", function (e) {
     document.getElementById('iteration').innerHTML = e.target.value;
 }, false);
+
+function cleanSymulation() {
+    document.getElementById('symulation').innerHTML = '';
+}
 
 function showArr(arr) {
     var symulationSection = document.getElementById('symulation');
@@ -34,8 +57,4 @@ function showArr(arr) {
         row.innerHTML += `<span class='item --selected-${arr[index]}'></span>`;
     }
     symulationSection.appendChild(row);
-}
-
-function cleanSymulation() {
-    document.getElementById('symulation').innerHTML = '';
 }

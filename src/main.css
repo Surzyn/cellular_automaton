@@ -39,8 +39,7 @@ body {
     }
 
 .item {
-    height: 5%;
-
+    height: 2%;
     margin: 1px;
     border: 1px solid black;
     -webkit-order: 0;
