@@ -1,7 +1,12 @@
-import { rule60 } from '../src/rules';
+import { calculateDynamicRule } from '../src/rules';
 
 
 describe('rules work fine', () => {
+    var rule60;
+    beforeAll(() => {
+        rule60 = calculateDynamicRule(60);
+    })
+    
     test('1 rule', () => {
         expect(rule60(false, false, false)).toBe(false);
     })

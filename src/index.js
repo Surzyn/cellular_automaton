@@ -1,4 +1,4 @@
-import { rule30, rule60, rule90 } from './rules';
+import { calculateDynamicRule } from './rules';
 import generateInitialValue from './source';
 import style from "./main.css";
 
@@ -24,16 +24,7 @@ doMagic(15);
 
 function getRule() {
     var rule = document.getElementById('rule').value;
-    switch (rule) {
-        case "30":
-            return rule30
-        case "60":
-            return rule60
-        case "90":
-            return rule90
-        default:
-            break;
-    }
+    return calculateDynamicRule(rule - 0);
 }
 
 document.getElementById('render').addEventListener("click", function (e) {
